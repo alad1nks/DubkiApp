@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardBus"
+    android:layout_width="match_parent"
+    android:layout_height="76dp"
+    android:background="@drawable/card_bus_bg">
+
+    <TextView
+        android:id="@+id/dayTimeBus"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/inTimeBus"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/dayTimeBus"/>
+
+    <TextView
+        android:id="@+id/stationBus"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"/>
+
+</RelativeLayout>

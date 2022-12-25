@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "705253373413",
+    "project_id": "dubki-app",
+    "storage_bucket": "dubki-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705253373413:android:af6b3be7e7656eeb042b0c",
+        "android_client_info": {
+          "package_name": "com.example.dubkiapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705253373413-ilm9m3qnepko4ang00rbcc37tggghjiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA623znQsmp9C1Lotb0EZt3_S_U7d36Sx8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705253373413-ilm9m3qnepko4ang00rbcc37tggghjiu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">DubkiApp</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_schedule_rus">Расписание</string>
+    <string name="title_to_moscow_rus">В Москву</string>
+    <string name="title_to_dubki_rus">В Дубки</string>
+    <string name="gone_soon">%1$d мин назад</string>
+    <string name="gone">%1$d ч %2$d мин назад</string>
+    <string name="coming_soon">через %1$d мин</string>
+    <string name="coming">через %1$d ч %2$d мин</string>
+
+    <string-array name="stations_array">
+        <item>Все станции</item>
+        <item>Одинцово</item>
+        <item>Молодежная</item>
+        <item>Славянский б-р</item>
+    </string-array>
+
+    <string-array name="days_array">
+        <item>Сегодня</item>
+        <item>Завтра</item>
+        <item>Будни</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </string-array>
+</resources>
