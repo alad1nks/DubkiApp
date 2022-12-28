@@ -1,72 +1,24 @@
 package com.example.dubkiapp.network
 
-import com.example.dubkiapp.database.domain.DatabaseDubkiSaturday
-import com.example.dubkiapp.database.domain.DatabaseDubkiSunday
-import com.example.dubkiapp.database.domain.DatabaseDubkiWeekday
-import com.example.dubkiapp.database.domain.DatabaseMoscowSaturday
-import com.example.dubkiapp.database.domain.DatabaseMoscowSunday
-import com.example.dubkiapp.database.domain.DatabaseMoscowWeekday
-import com.example.dubkiapp.domain.Bus
+import com.example.dubkiapp.database.domain.DatabaseSchedule
+
 
 data class BusResponse(
     val id: Int? = null,
+    val day: String? = null,
     val direction: String? = null,
-    val dayTime: Long? = null,
-    val dayTimeFormat: String? = null
+    val station: String? = null,
+    val dayTimeString: String? = null,
+    val dayTime: Long? = null
 )
 
-fun BusResponse.asDatabaseMoscowWeekday(): DatabaseMoscowWeekday {
-    return DatabaseMoscowWeekday(
+fun BusResponse.asDatabase(): DatabaseSchedule {
+    return DatabaseSchedule(
         id = id,
-        station = direction,
-        dayTime = dayTime,
-        dayTimeFormat = dayTimeFormat
-    )
-}
-
-fun BusResponse.asDatabaseMoscowSaturday(): DatabaseMoscowSaturday {
-    return DatabaseMoscowSaturday(
-        id = id,
-        station = direction,
-        dayTime = dayTime,
-        dayTimeFormat = dayTimeFormat
-    )
-}
-
-fun BusResponse.asDatabaseMoscowSunday(): DatabaseMoscowSunday {
-    return DatabaseMoscowSunday(
-        id = id,
-        station = direction,
-        dayTime = dayTime,
-        dayTimeFormat = dayTimeFormat
-    )
-}
-
-
-
-fun BusResponse.asDatabaseDubkiWeekday(): DatabaseDubkiWeekday {
-    return DatabaseDubkiWeekday(
-        id = id,
-        station = direction,
-        dayTime = dayTime,
-        dayTimeFormat = dayTimeFormat
-    )
-}
-
-fun BusResponse.asDatabaseDubkiSaturday(): DatabaseDubkiSaturday {
-    return DatabaseDubkiSaturday(
-        id = id,
-        station = direction,
-        dayTime = dayTime,
-        dayTimeFormat = dayTimeFormat
-    )
-}
-
-fun BusResponse.asDatabaseDubkiSunday(): DatabaseDubkiSunday {
-    return DatabaseDubkiSunday(
-        id = id,
-        station = direction,
-        dayTime = dayTime,
-        dayTimeFormat = dayTimeFormat
+        day = day,
+        direction = direction,
+        station = station,
+        dayTimeString = dayTimeString,
+        dayTime = dayTime
     )
 }

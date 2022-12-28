@@ -4,13 +4,15 @@ import com.example.dubkiapp.domain.Bus
 
 interface ScheduleRepository {
     suspend fun refreshScheduleFirebase()
-    suspend fun refreshScheduleMoscowDatabase()
+
+
+    suspend fun refreshScheduleMoscowDatabase(day: String, station: String)
     suspend fun getNextMoscowBus(): Int
     suspend fun getScheduleMoscow(): List<Bus>
 
 
 
-    suspend fun refreshScheduleDubkiDatabase()
+    suspend fun refreshScheduleDubkiDatabase(day: String, station: String)
     suspend fun getNextDubkiBus(): Int
     suspend fun getScheduleDubki(): List<Bus>
 }

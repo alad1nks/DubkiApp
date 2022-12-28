@@ -4,72 +4,94 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.dubkiapp.database.domain.DatabaseDubkiSaturday
-import com.example.dubkiapp.database.domain.DatabaseDubkiSunday
-import com.example.dubkiapp.database.domain.DatabaseDubkiWeekday
-import com.example.dubkiapp.database.domain.DatabaseMoscowSaturday
-import com.example.dubkiapp.database.domain.DatabaseMoscowSunday
-import com.example.dubkiapp.database.domain.DatabaseMoscowWeekday
+import com.example.dubkiapp.database.domain.DatabaseSchedule
 
 @Dao
 interface ScheduleDao {
-    @Query("SELECT * FROM databasemoscowweekday")
-    fun getScheduleMoscowWeekday(): List<DatabaseMoscowWeekday>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'wkd' AND direction = 'msk' ORDER BY dayTime")
+    fun getScheduleWeekdayMoscowAll(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'std' AND direction = 'msk' ORDER BY dayTime")
+    fun getScheduleSaturdayMoscowAll(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'snd' AND direction = 'msk' ORDER BY dayTime")
+    fun getScheduleSundayMoscowAll(): List<DatabaseSchedule>
+
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'wkd' AND direction = 'dbk' ORDER BY dayTime")
+    fun getScheduleWeekdayDubkiAll(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'std' AND direction = 'dbk' ORDER BY dayTime")
+    fun getScheduleSaturdayDubkiAll(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'snd' AND direction = 'dbk' ORDER BY dayTime")
+    fun getScheduleSundayDubkiAll(): List<DatabaseSchedule>
+
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'wkd' AND direction = 'msk' AND station = 'odn' ORDER BY dayTime")
+    fun getScheduleWeekdayMoscowOdn(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'std' AND direction = 'msk' AND station = 'odn' ORDER BY dayTime")
+    fun getScheduleSaturdayMoscowOdn(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'snd' AND direction = 'msk' AND station = 'odn' ORDER BY dayTime")
+    fun getScheduleSundayMoscowOdn(): List<DatabaseSchedule>
+
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'wkd' AND direction = 'dbk' AND station = 'odn' ORDER BY dayTime")
+    fun getScheduleWeekdayDubkiOdn(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'std' AND direction = 'dbk' AND station = 'odn' ORDER BY dayTime")
+    fun getScheduleSaturdayDubkiOdn(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'snd' AND direction = 'dbk' AND station = 'odn' ORDER BY dayTime")
+    fun getScheduleSundayDubkiOdn(): List<DatabaseSchedule>
+
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'wkd' AND direction = 'msk' AND station = 'slv' ORDER BY dayTime")
+    fun getScheduleWeekdayMoscowSlv(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'std' AND direction = 'msk' AND station = 'slv' ORDER BY dayTime")
+    fun getScheduleSaturdayMoscowSlv(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'snd' AND direction = 'msk' AND station = 'slv' ORDER BY dayTime")
+    fun getScheduleSundayMoscowSlv(): List<DatabaseSchedule>
+
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'wkd' AND direction = 'dbk' AND station = 'slv' ORDER BY dayTime")
+    fun getScheduleWeekdayDubkiSlv(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'std' AND direction = 'dbk' AND station = 'slv' ORDER BY dayTime")
+    fun getScheduleSaturdayDubkiSlv(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'snd' AND direction = 'dbk' AND station = 'slv' ORDER BY dayTime")
+    fun getScheduleSundayDubkiSlv(): List<DatabaseSchedule>
+
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'wkd' AND direction = 'msk' AND station = 'mld' ORDER BY dayTime")
+    fun getScheduleWeekdayMoscowMld(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'std' AND direction = 'msk' AND station = 'mld' ORDER BY dayTime")
+    fun getScheduleSaturdayMoscowMld(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'snd' AND direction = 'msk' AND station = 'mld' ORDER BY dayTime")
+    fun getScheduleSundayMoscowMld(): List<DatabaseSchedule>
+
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'wkd' AND direction = 'dbk' AND station = 'mld' ORDER BY dayTime")
+    fun getScheduleWeekdayDubkiMld(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'std' AND direction = 'dbk' AND station = 'mld' ORDER BY dayTime")
+    fun getScheduleSaturdayDubkiMld(): List<DatabaseSchedule>
+
+    @Query("SELECT * FROM databaseschedule WHERE day = 'snd' AND direction = 'dbk' AND station = 'mld' ORDER BY dayTime")
+    fun getScheduleSundayDubkiMld(): List<DatabaseSchedule>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertScheduleMoscowWeekday(schedule: List<DatabaseMoscowWeekday>)
+    fun insertSchedule(schedule: List<DatabaseSchedule>)
 
-    @Query("DELETE FROM databasemoscowweekday")
-    fun clearScheduleMoscowWeekday()
-
-
-    @Query("SELECT * FROM databasemoscowsaturday")
-    fun getScheduleMoscowSaturday(): List<DatabaseMoscowSaturday>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertScheduleMoscowSaturday(schedule: List<DatabaseMoscowSaturday>)
-
-    @Query("DELETE FROM databasemoscowsaturday")
-    fun clearScheduleMoscowSaturday()
-
-
-    @Query("SELECT * FROM databasemoscowsunday")
-    fun getScheduleMoscowSunday(): List<DatabaseMoscowSunday>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertScheduleMoscowSunday(schedule: List<DatabaseMoscowSunday>)
-
-    @Query("DELETE FROM databasemoscowsunday")
-    fun clearScheduleMoscowSunday()
-
-
-
-    @Query("SELECT * FROM databasedubkiweekday")
-    fun getScheduleDubkiWeekday(): List<DatabaseDubkiWeekday>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertScheduleDubkiWeekday(schedule: List<DatabaseDubkiWeekday>)
-
-    @Query("DELETE FROM databasedubkiweekday")
-    fun clearScheduleDubkiWeekday()
-
-
-    @Query("SELECT * FROM databasedubkisaturday")
-    fun getScheduleDubkiSaturday(): List<DatabaseDubkiSaturday>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertScheduleDubkiSaturday(schedule: List<DatabaseDubkiSaturday>)
-
-    @Query("DELETE FROM databasedubkisaturday")
-    fun clearScheduleDubkiSaturday()
-
-
-    @Query("SELECT * FROM databasedubkisunday")
-    fun getScheduleDubkiSunday(): List<DatabaseDubkiSunday>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertScheduleDubkiSunday(schedule: List<DatabaseDubkiSunday>)
-
-    @Query("DELETE FROM databasedubkisunday")
-    fun clearScheduleDubkiSunday()
+    @Query("DELETE FROM databaseschedule")
+    fun clearSchedule()
 }

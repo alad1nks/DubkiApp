@@ -35,6 +35,9 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var tabLayout: TabLayout
 
+    private var day = ""
+    private var station = ""
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -52,6 +55,8 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         tabLayout = binding.tabs
 
         context?.let {
@@ -78,6 +83,7 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         binding.stationSpinner.onItemSelectedListener = this
         binding.daySpinner.onItemSelectedListener = this
+
 
         if (savedInstanceState != null ){
             setCurrentTab(savedInstanceState.getInt("tabState"))
@@ -121,15 +127,16 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
         binding.recyclerSchedule.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        lifecycleScope.launch {
-            viewModel.getSchedule()
-        }
+//        lifecycleScope.launch {
+//            viewModel.getSchedule(day, station)
+//        }
 
         viewModel.scheduleMoscow.observe(viewLifecycleOwner) {
             it?.let {
                 scheduleMoscowAdapter.submitList(it.first)
                 nextMoscowBus = it.second
-                binding.recyclerSchedule.scrollToPosition(nextMoscowBus)
+                (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextMoscowBus)
+                Log.d(TAG, "nextMoscowBus $nextMoscowBus")
             }
         }
 
@@ -160,8 +167,46 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        parent.getItemAtPosition(pos)
-        Log.d(TAG, "saskoksis${parent}, $pos")
+        when(parent.getItemAtPosition(pos)) {
+            "Все станции" -> {
+                station = "all"
+            }
+            "Молодежная" -> {
+                station = "mld"
+            }
+            "Славянский б-р" -> {
+                station = "slv"
+            }
+            "Одинцово" -> {
+                station = "odn"
+            }
+
+            "Сегодня" -> {
+                day = "cur"
+            }
+            "Завтра" -> {
+                day = "tom"
+            }
+            "Будни" -> {
+                day = "wkd"
+            }
+            "Суббота" -> {
+                day = "std"
+            }
+            "Воскресенье" -> {
+                day = "snd"
+            }
+        }
+
+        if (day != "" && station != "") {
+            lifecycleScope.launch {
+                viewModel.getSchedule(day, station)
+            }
+        } else {
+            Log.d(TAG, "raptor $day $station")
+        }
+
+        Log.d(TAG, "adapter ${parent.getItemAtPosition(pos)}")
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

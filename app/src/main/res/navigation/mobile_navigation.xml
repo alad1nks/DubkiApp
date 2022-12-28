@@ -13,10 +13,10 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.dubkiapp.ui.dashboard.DashboardFragment"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_market" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.dubkiapp.ui.notifications.NotificationsFragment"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_settings" />
 </navigation>

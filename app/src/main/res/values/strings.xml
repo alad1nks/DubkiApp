@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">DubkiApp</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_settings_rus">Настройки</string>
+    <string name="title_market_rus">Маркет</string>
     <string name="title_schedule_rus">Расписание</string>
     <string name="title_to_moscow_rus">В Москву</string>
     <string name="title_to_dubki_rus">В Дубки</string>

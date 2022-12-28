@@ -60,7 +60,7 @@ class ScheduleDubkiAdapter : ListAdapter<Bus, ScheduleDubkiAdapter.ScheduleDubki
                 findInTimeBus.setTextAppearance(R.style.TextAppearance_Medium_InTime_Gone)
                 findInTimeBus.setBackgroundResource(R.drawable.in_time_bus_common_bg)
             }
-            findDayTimeBus.text = item.dayTimeFormat
+            findDayTimeBus.text = item.dayTimeString
 
             when (item.station) {
                 "Одинцово" -> {

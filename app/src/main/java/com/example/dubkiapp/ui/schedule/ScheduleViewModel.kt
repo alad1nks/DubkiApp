@@ -19,14 +19,14 @@ class ScheduleViewModel @Inject constructor(
     val scheduleDubki = MutableLiveData<Pair<List<Bus>, Int>>()
 
 
-    fun getSchedule() {
+    fun getSchedule(day: String, station: String) {
         viewModelScope.launch(Dispatchers.IO) {
             scheduleRepository.refreshScheduleFirebase()
 
-            scheduleRepository.refreshScheduleMoscowDatabase()
+            scheduleRepository.refreshScheduleMoscowDatabase(day, station)
             scheduleMoscow.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
 
-            scheduleRepository.refreshScheduleDubkiDatabase()
+            scheduleRepository.refreshScheduleDubkiDatabase(day, station)
             scheduleDubki.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
         }
     }
