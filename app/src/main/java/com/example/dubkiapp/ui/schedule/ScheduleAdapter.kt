@@ -1,7 +1,6 @@
 package com.example.dubkiapp.ui.schedule
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dubkiapp.R
 import com.example.dubkiapp.domain.Bus
 
-class ScheduleMoscowAdapter : ListAdapter<Bus, ScheduleMoscowAdapter.ScheduleMoscowViewHolder>(DiffCallBack) {
+class ScheduleAdapter : ListAdapter<Bus, ScheduleAdapter.ScheduleViewHolder>(DiffCallBack) {
 
     companion object DiffCallBack: DiffUtil.ItemCallback<Bus>() {
         override fun areItemsTheSame(oldItem: Bus, newItem: Bus): Boolean {
-            return oldItem.inTime == newItem.inTime
+            return false
         }
 
         override fun areContentsTheSame(oldItem: Bus, newItem: Bus): Boolean {
-            return oldItem.inTime == newItem.inTime
+            return false
         }
     }
 
-    class ScheduleMoscowViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ScheduleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val context: Context = view.context
         val findInTimeBus: TextView = view.findViewById(R.id.inTimeBus)
         val findDayTimeBus: TextView = view.findViewById(R.id.dayTimeBus)
@@ -32,32 +31,35 @@ class ScheduleMoscowAdapter : ListAdapter<Bus, ScheduleMoscowAdapter.ScheduleMos
         val findCardBus: View = view.findViewById(R.id.cardBus)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleMoscowViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ScheduleMoscowViewHolder(layoutInflater.inflate(R.layout.bus_item, parent, false))
+        return ScheduleViewHolder(layoutInflater.inflate(R.layout.bus_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ScheduleMoscowViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ScheduleViewHolder, position: Int) {
         val item = getItem(position)
         with(holder) {
-            if (item.inTime!! / 60 > 0) {
-                findInTimeBus.text = "через ${item.inTime / 60} ч ${item.inTime % 60} мин"
+            if (item.inTime == null) {
+
+            }
+            else if (item.inTime / 60 > 0) {
+                findInTimeBus.text = context.getString(R.string.coming, item.inTime / 60, item.inTime % 60)
                 findInTimeBus.setTextAppearance(R.style.TextAppearance_Medium_Intime)
                 findInTimeBus.setBackgroundResource(R.drawable.in_time_bus_common_bg)
             } else if (item.inTime > 30) {
-                findInTimeBus.text = "через ${item.inTime} мин"
+                findInTimeBus.text = context.getString(R.string.coming_soon, item.inTime)
                 findInTimeBus.setTextAppearance(R.style.TextAppearance_Medium_Intime)
                 findInTimeBus.setBackgroundResource(R.drawable.in_time_bus_common_bg)
             } else if (item.inTime >= 0) {
-                findInTimeBus.text = "через ${item.inTime} мин"
+                findInTimeBus.text = context.getString(R.string.coming_soon, item.inTime)
                 findInTimeBus.setTextAppearance(R.style.TextAppearance_Medium_Intime_Soon)
                 findInTimeBus.setBackgroundResource(R.drawable.in_time_bus_soon_bg)
             } else if (item.inTime / 60 < 0) {
-                findInTimeBus.text = "${-item.inTime / 60} ч ${-item.inTime % 60} мин назад"
+                findInTimeBus.text = context.getString(R.string.gone, -item.inTime / 60, -item.inTime % 60)
                 findInTimeBus.setTextAppearance(R.style.TextAppearance_Medium_InTime_Gone)
                 findInTimeBus.setBackgroundResource(R.drawable.in_time_bus_common_bg)
             } else {
-                findInTimeBus.text = "${-item.inTime} мин назад"
+                findInTimeBus.text = context.getString(R.string.gone_soon, -item.inTime)
                 findInTimeBus.setTextAppearance(R.style.TextAppearance_Medium_InTime_Gone)
                 findInTimeBus.setBackgroundResource(R.drawable.in_time_bus_common_bg)
             }
@@ -66,7 +68,7 @@ class ScheduleMoscowAdapter : ListAdapter<Bus, ScheduleMoscowAdapter.ScheduleMos
             when (item.station) {
                 "Одинцово" -> {
                     findStationBus.text = "Одинцово"
-                    if (item.inTime >= 0) {
+                    if (item.inTime == null || item.inTime >= 0) {
                         findStationBus.setTextAppearance(R.style.TextAppearance_Medium_Station_Odintsovo)
                         findDayTimeBus.setTextAppearance(R.style.TextAppearance_Medium_DayTime_Odintsovo)
                     } else {
@@ -76,7 +78,7 @@ class ScheduleMoscowAdapter : ListAdapter<Bus, ScheduleMoscowAdapter.ScheduleMos
                 }
                 "Молодежная" -> {
                     findStationBus.text = "Молодежная"
-                    if (item.inTime >= 0) {
+                    if (item.inTime == null || item.inTime >= 0) {
                         findStationBus.setTextAppearance(R.style.TextAppearance_Medium_Station_Molodyozhnaya)
                         findDayTimeBus.setTextAppearance(R.style.TextAppearance_Medium_DayTime_Molodyozhnaya)
                     } else {
@@ -86,7 +88,7 @@ class ScheduleMoscowAdapter : ListAdapter<Bus, ScheduleMoscowAdapter.ScheduleMos
                 }
                 else -> {
                     findStationBus.text = "Cлавянский б-р"
-                    if (item.inTime >= 0) {
+                    if (item.inTime == null || item.inTime >= 0) {
                         findStationBus.setTextAppearance(R.style.TextAppearance_Medium_Station_Slavyanka)
                         findDayTimeBus.setTextAppearance(R.style.TextAppearance_Medium_DayTime_Slavyanka)
                     } else {

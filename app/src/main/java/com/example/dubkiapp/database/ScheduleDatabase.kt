@@ -9,7 +9,7 @@ import com.example.dubkiapp.database.domain.DatabaseSchedule
     entities = [
         DatabaseSchedule::class
                ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class ScheduleDatabase: RoomDatabase() {
