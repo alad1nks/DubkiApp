@@ -15,7 +15,7 @@ class ScheduleAdapter : ListAdapter<Bus, ScheduleAdapter.ScheduleViewHolder>(Dif
 
     companion object DiffCallBack: DiffUtil.ItemCallback<Bus>() {
         override fun areItemsTheSame(oldItem: Bus, newItem: Bus): Boolean {
-            return false
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Bus, newItem: Bus): Boolean {

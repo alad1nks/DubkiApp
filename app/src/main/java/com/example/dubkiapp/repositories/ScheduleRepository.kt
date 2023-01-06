@@ -3,13 +3,18 @@ package com.example.dubkiapp.repositories
 import com.example.dubkiapp.domain.Bus
 
 interface ScheduleRepository {
-    suspend fun refreshScheduleFirebase()
+    suspend fun refreshScheduleFirebase(): Boolean
 
 
     suspend fun refreshScheduleTodayMoscowAll()
     suspend fun refreshScheduleTodayMoscowOdintsovo()
     suspend fun refreshScheduleTodayMoscowSlavyanka()
     suspend fun refreshScheduleTodayMoscowMolodezhnaya()
+
+    suspend fun refreshScheduleTomorrowMoscowAll()
+    suspend fun refreshScheduleTomorrowMoscowOdintsovo()
+    suspend fun refreshScheduleTomorrowMoscowSlavyanka()
+    suspend fun refreshScheduleTomorrowMoscowMolodezhnaya()
 
     suspend fun refreshScheduleWeekdayMoscowAll()
     suspend fun refreshScheduleWeekdayMoscowOdintsovo()
@@ -31,6 +36,11 @@ interface ScheduleRepository {
     suspend fun refreshScheduleTodayDubkiOdintsovo()
     suspend fun refreshScheduleTodayDubkiSlavyanka()
     suspend fun refreshScheduleTodayDubkiMolodezhnaya()
+
+    suspend fun refreshScheduleTomorrowDubkiAll()
+    suspend fun refreshScheduleTomorrowDubkiOdintsovo()
+    suspend fun refreshScheduleTomorrowDubkiSlavyanka()
+    suspend fun refreshScheduleTomorrowDubkiMolodezhnaya()
 
     suspend fun refreshScheduleWeekdayDubkiAll()
     suspend fun refreshScheduleWeekdayDubkiOdintsovo()

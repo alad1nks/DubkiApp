@@ -23,6 +23,10 @@ class ScheduleViewModel @Inject constructor(
     val scheduleTodayMoscowSlavyanka = MutableLiveData<Pair<List<Bus>, Int>>()
     val scheduleTodayMoscowMolodezhnaya = MutableLiveData<Pair<List<Bus>, Int>>()
 
+    val scheduleTomorrowMoscowAll = MutableLiveData<List<Bus>>()
+    val scheduleTomorrowMoscowOdintsovo = MutableLiveData<List<Bus>>()
+    val scheduleTomorrowMoscowSlavyanka = MutableLiveData<List<Bus>>()
+    val scheduleTomorrowMoscowMolodezhnaya = MutableLiveData<List<Bus>>()
     val scheduleWeekdayMoscowAll = MutableLiveData<List<Bus>>()
     val scheduleWeekdayMoscowOdintsovo = MutableLiveData<List<Bus>>()
     val scheduleWeekdayMoscowSlavyanka = MutableLiveData<List<Bus>>()
@@ -42,6 +46,10 @@ class ScheduleViewModel @Inject constructor(
     val scheduleTodayDubkiSlavyanka = MutableLiveData<Pair<List<Bus>, Int>>()
     val scheduleTodayDubkiMolodezhnaya = MutableLiveData<Pair<List<Bus>, Int>>()
 
+    val scheduleTomorrowDubkiAll = MutableLiveData<List<Bus>>()
+    val scheduleTomorrowDubkiOdintsovo = MutableLiveData<List<Bus>>()
+    val scheduleTomorrowDubkiSlavyanka = MutableLiveData<List<Bus>>()
+    val scheduleTomorrowDubkiMolodezhnaya = MutableLiveData<List<Bus>>()
     val scheduleWeekdayDubkiAll = MutableLiveData<List<Bus>>()
     val scheduleWeekdayDubkiOdintsovo = MutableLiveData<List<Bus>>()
     val scheduleWeekdayDubkiSlavyanka = MutableLiveData<List<Bus>>()
@@ -57,126 +65,159 @@ class ScheduleViewModel @Inject constructor(
 
 
     init {
-        Log.d(TAG, "startuem")
         refreshSchedule()
     }
     private fun refreshSchedule() {
         viewModelScope.launch(Dispatchers.IO) {
-            scheduleRepository.refreshScheduleFirebase()
+            while (true) {
+                scheduleRepository.refreshScheduleFirebase()
 
-            scheduleRepository.refreshScheduleTodayMoscowAll()
-            scheduleTodayMoscowAll.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
+                scheduleRepository.refreshScheduleTodayMoscowAll()
+                scheduleTodayMoscowAll.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
 
-            scheduleRepository.refreshScheduleTodayDubkiAll()
-            scheduleTodayDubkiAll.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
-
-
-            scheduleRepository.refreshScheduleTodayMoscowOdintsovo()
-            scheduleTodayMoscowOdintsovo.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
-
-            scheduleRepository.refreshScheduleTodayDubkiOdintsovo()
-            scheduleTodayDubkiOdintsovo.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
+                scheduleRepository.refreshScheduleTodayDubkiAll()
+                scheduleTodayDubkiAll.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
 
 
-            scheduleRepository.refreshScheduleTodayMoscowSlavyanka()
-            scheduleTodayMoscowSlavyanka.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
+                scheduleRepository.refreshScheduleTodayMoscowOdintsovo()
+                scheduleTodayMoscowOdintsovo.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
 
-            scheduleRepository.refreshScheduleTodayDubkiSlavyanka()
-            scheduleTodayDubkiSlavyanka.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
-
-
-            scheduleRepository.refreshScheduleTodayMoscowMolodezhnaya()
-            scheduleTodayMoscowMolodezhnaya.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
-
-            scheduleRepository.refreshScheduleTodayDubkiMolodezhnaya()
-            scheduleTodayDubkiMolodezhnaya.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
+                scheduleRepository.refreshScheduleTodayDubkiOdintsovo()
+                scheduleTodayDubkiOdintsovo.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
 
 
-            scheduleRepository.refreshScheduleWeekdayMoscowAll()
-            scheduleWeekdayMoscowAll.postValue(scheduleRepository.getScheduleMoscow())
+                scheduleRepository.refreshScheduleTodayMoscowSlavyanka()
+                scheduleTodayMoscowSlavyanka.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
 
-            scheduleRepository.refreshScheduleWeekdayDubkiAll()
-            scheduleWeekdayDubkiAll.postValue(scheduleRepository.getScheduleDubki())
-
-
-            scheduleRepository.refreshScheduleWeekdayMoscowOdintsovo()
-            scheduleWeekdayMoscowOdintsovo.postValue(scheduleRepository.getScheduleMoscow())
-
-            scheduleRepository.refreshScheduleWeekdayDubkiOdintsovo()
-            scheduleWeekdayDubkiOdintsovo.postValue(scheduleRepository.getScheduleDubki())
+                scheduleRepository.refreshScheduleTodayDubkiSlavyanka()
+                scheduleTodayDubkiSlavyanka.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
 
 
-            scheduleRepository.refreshScheduleWeekdayMoscowSlavyanka()
-            scheduleWeekdayMoscowSlavyanka.postValue(scheduleRepository.getScheduleMoscow())
+                scheduleRepository.refreshScheduleTodayMoscowMolodezhnaya()
+                scheduleTodayMoscowMolodezhnaya.postValue(Pair(scheduleRepository.getScheduleMoscow(), scheduleRepository.getNextMoscowBus()))
 
-            scheduleRepository.refreshScheduleWeekdayDubkiSlavyanka()
-            scheduleWeekdayDubkiSlavyanka.postValue(scheduleRepository.getScheduleDubki())
-
-
-            scheduleRepository.refreshScheduleWeekdayMoscowMolodezhnaya()
-            scheduleWeekdayMoscowMolodezhnaya.postValue(scheduleRepository.getScheduleMoscow())
-
-            scheduleRepository.refreshScheduleWeekdayDubkiMolodezhnaya()
-            scheduleWeekdayDubkiMolodezhnaya.postValue(scheduleRepository.getScheduleDubki())
+                scheduleRepository.refreshScheduleTodayDubkiMolodezhnaya()
+                scheduleTodayDubkiMolodezhnaya.postValue(Pair(scheduleRepository.getScheduleDubki(), scheduleRepository.getNextDubkiBus()))
 
 
-            scheduleRepository.refreshScheduleSaturdayMoscowAll()
-            scheduleSaturdayMoscowAll.postValue(scheduleRepository.getScheduleMoscow())
+                scheduleRepository.refreshScheduleWeekdayMoscowAll()
+                scheduleWeekdayMoscowAll.postValue(scheduleRepository.getScheduleMoscow())
 
-            scheduleRepository.refreshScheduleSaturdayDubkiAll()
-            scheduleSaturdayDubkiAll.postValue(scheduleRepository.getScheduleDubki())
-
-
-            scheduleRepository.refreshScheduleSaturdayMoscowOdintsovo()
-            scheduleSaturdayMoscowOdintsovo.postValue(scheduleRepository.getScheduleMoscow())
-
-            scheduleRepository.refreshScheduleSaturdayDubkiOdintsovo()
-            scheduleSaturdayDubkiOdintsovo.postValue(scheduleRepository.getScheduleDubki())
+                scheduleRepository.refreshScheduleWeekdayDubkiAll()
+                scheduleWeekdayDubkiAll.postValue(scheduleRepository.getScheduleDubki())
 
 
-            scheduleRepository.refreshScheduleSaturdayMoscowSlavyanka()
-            scheduleSaturdayMoscowSlavyanka.postValue(scheduleRepository.getScheduleMoscow())
+                scheduleRepository.refreshScheduleWeekdayMoscowOdintsovo()
+                scheduleWeekdayMoscowOdintsovo.postValue(scheduleRepository.getScheduleMoscow())
 
-            scheduleRepository.refreshScheduleSaturdayDubkiSlavyanka()
-            scheduleSaturdayDubkiSlavyanka.postValue(scheduleRepository.getScheduleDubki())
-
-
-            scheduleRepository.refreshScheduleSaturdayMoscowMolodezhnaya()
-            scheduleSaturdayMoscowMolodezhnaya.postValue(scheduleRepository.getScheduleMoscow())
-
-            scheduleRepository.refreshScheduleSaturdayDubkiMolodezhnaya()
-            scheduleSaturdayDubkiMolodezhnaya.postValue(scheduleRepository.getScheduleDubki())
+                scheduleRepository.refreshScheduleWeekdayDubkiOdintsovo()
+                scheduleWeekdayDubkiOdintsovo.postValue(scheduleRepository.getScheduleDubki())
 
 
-            scheduleRepository.refreshScheduleSundayMoscowAll()
-            scheduleSundayMoscowAll.postValue(scheduleRepository.getScheduleMoscow())
+                scheduleRepository.refreshScheduleWeekdayMoscowSlavyanka()
+                scheduleWeekdayMoscowSlavyanka.postValue(scheduleRepository.getScheduleMoscow())
 
-            scheduleRepository.refreshScheduleSundayDubkiAll()
-            scheduleSundayDubkiAll.postValue(scheduleRepository.getScheduleDubki())
-
-
-            scheduleRepository.refreshScheduleSundayMoscowOdintsovo()
-            scheduleSundayMoscowOdintsovo.postValue(scheduleRepository.getScheduleMoscow())
-
-            scheduleRepository.refreshScheduleSundayDubkiOdintsovo()
-            scheduleSundayDubkiOdintsovo.postValue(scheduleRepository.getScheduleDubki())
+                scheduleRepository.refreshScheduleWeekdayDubkiSlavyanka()
+                scheduleWeekdayDubkiSlavyanka.postValue(scheduleRepository.getScheduleDubki())
 
 
-            scheduleRepository.refreshScheduleSundayMoscowSlavyanka()
-            scheduleSundayMoscowSlavyanka.postValue(scheduleRepository.getScheduleMoscow())
+                scheduleRepository.refreshScheduleWeekdayMoscowMolodezhnaya()
+                scheduleWeekdayMoscowMolodezhnaya.postValue(scheduleRepository.getScheduleMoscow())
 
-            scheduleRepository.refreshScheduleSundayDubkiSlavyanka()
-            scheduleSundayDubkiSlavyanka.postValue(scheduleRepository.getScheduleDubki())
+                scheduleRepository.refreshScheduleWeekdayDubkiMolodezhnaya()
+                scheduleWeekdayDubkiMolodezhnaya.postValue(scheduleRepository.getScheduleDubki())
 
 
-            scheduleRepository.refreshScheduleSundayMoscowMolodezhnaya()
-            scheduleSundayMoscowMolodezhnaya.postValue(scheduleRepository.getScheduleMoscow())
+                scheduleRepository.refreshScheduleSaturdayMoscowAll()
+                scheduleSaturdayMoscowAll.postValue(scheduleRepository.getScheduleMoscow())
 
-            scheduleRepository.refreshScheduleSundayDubkiMolodezhnaya()
-            scheduleSundayDubkiMolodezhnaya.postValue(scheduleRepository.getScheduleDubki())
+                scheduleRepository.refreshScheduleSaturdayDubkiAll()
+                scheduleSaturdayDubkiAll.postValue(scheduleRepository.getScheduleDubki())
 
+
+                scheduleRepository.refreshScheduleSaturdayMoscowOdintsovo()
+                scheduleSaturdayMoscowOdintsovo.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleSaturdayDubkiOdintsovo()
+                scheduleSaturdayDubkiOdintsovo.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleSaturdayMoscowSlavyanka()
+                scheduleSaturdayMoscowSlavyanka.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleSaturdayDubkiSlavyanka()
+                scheduleSaturdayDubkiSlavyanka.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleSaturdayMoscowMolodezhnaya()
+                scheduleSaturdayMoscowMolodezhnaya.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleSaturdayDubkiMolodezhnaya()
+                scheduleSaturdayDubkiMolodezhnaya.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleSundayMoscowAll()
+                scheduleSundayMoscowAll.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleSundayDubkiAll()
+                scheduleSundayDubkiAll.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleSundayMoscowOdintsovo()
+                scheduleSundayMoscowOdintsovo.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleSundayDubkiOdintsovo()
+                scheduleSundayDubkiOdintsovo.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleSundayMoscowSlavyanka()
+                scheduleSundayMoscowSlavyanka.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleSundayDubkiSlavyanka()
+                scheduleSundayDubkiSlavyanka.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleSundayMoscowMolodezhnaya()
+                scheduleSundayMoscowMolodezhnaya.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleSundayDubkiMolodezhnaya()
+                scheduleSundayDubkiMolodezhnaya.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleTomorrowMoscowAll()
+                scheduleTomorrowMoscowAll.postValue(scheduleRepository.getScheduleMoscow())
+
+
+                scheduleRepository.refreshScheduleTomorrowDubkiAll()
+                scheduleTomorrowDubkiAll.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleTomorrowMoscowOdintsovo()
+                scheduleTomorrowMoscowOdintsovo.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleTomorrowDubkiOdintsovo()
+                scheduleTomorrowDubkiOdintsovo.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleTomorrowMoscowSlavyanka()
+                scheduleTomorrowMoscowSlavyanka.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleTomorrowDubkiSlavyanka()
+                scheduleTomorrowDubkiSlavyanka.postValue(scheduleRepository.getScheduleDubki())
+
+
+                scheduleRepository.refreshScheduleTomorrowMoscowMolodezhnaya()
+                scheduleTomorrowMoscowMolodezhnaya.postValue(scheduleRepository.getScheduleMoscow())
+
+                scheduleRepository.refreshScheduleTomorrowDubkiMolodezhnaya()
+                scheduleTomorrowDubkiMolodezhnaya.postValue(scheduleRepository.getScheduleDubki())
+                Log.d(TAG, "startuem")
+                Thread.sleep(60000)
+            }
         }
     }
+
+
 
 
 }

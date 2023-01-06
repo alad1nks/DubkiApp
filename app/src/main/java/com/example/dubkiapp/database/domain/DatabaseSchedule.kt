@@ -18,7 +18,8 @@ data class DatabaseSchedule(
 
 fun DatabaseSchedule.asDomainWithTime(): Bus {
     return Bus(
-        inTime = (dayTime!! - (Calendar.getInstance().timeInMillis + 10800000 + 25200000) % 86400000) / 60000,
+        id = id,
+        inTime = (dayTime!! - (Calendar.getInstance().timeInMillis + 10800000) % 86400000) / 60000,
         station = when(station) {
             "odn" -> "Одинцово"
             "slv" -> "Славянский б-р"
@@ -30,6 +31,7 @@ fun DatabaseSchedule.asDomainWithTime(): Bus {
 
 fun DatabaseSchedule.asDomain(): Bus {
     return Bus(
+        id = id,
         inTime = null,
         station = when(station) {
             "odn" -> "Одинцово"

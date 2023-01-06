@@ -26,7 +26,7 @@ class DefaultScheduleRepository @Inject constructor(
     private var scheduleDubki: List<Bus> = listOf()
     private var revision: Int? = null
 
-    override suspend fun refreshScheduleFirebase() {
+    override suspend fun refreshScheduleFirebase(): Boolean {
         revision = suspendCoroutineWithTimeout(2000L) {
             realtimeDatabase.reference.child("schedule").child("revision").get().addOnSuccessListener { result ->
                 val response = result.getValue(Long::class.java)
@@ -35,18 +35,18 @@ class DefaultScheduleRepository @Inject constructor(
         }
 
         if (revision == null) {
+            return false
         } else if (revision!! != appPreference.getRevision()) {
             appPreference.setRevision(revision!!)
             refreshDatabase()
-
-        } else {
         }
+        return true
     }
 
     override suspend fun refreshScheduleTodayMoscowAll() {
         scheduleMoscow = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             1 -> database.scheduleDao().getScheduleSundayMoscowAll().map { it.asDomainWithTime() }
-            2 -> database.scheduleDao().getScheduleSaturdayMoscowAll().map { it.asDomainWithTime() }
+            7 -> database.scheduleDao().getScheduleSaturdayMoscowAll().map { it.asDomainWithTime() }
             else -> database.scheduleDao().getScheduleWeekdayMoscowAll().map { it.asDomainWithTime() }
         }
         Log.d(TAG, "schedule$scheduleMoscow")
@@ -75,6 +75,40 @@ class DefaultScheduleRepository @Inject constructor(
             else -> database.scheduleDao().getScheduleWeekdayMoscowMld().map { it.asDomainWithTime() }
         }
     }
+
+
+    override suspend fun refreshScheduleTomorrowMoscowAll() {
+        scheduleMoscow = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            7 -> database.scheduleDao().getScheduleSundayMoscowAll().map { it.asDomain() }
+            6 -> database.scheduleDao().getScheduleSaturdayMoscowAll().map { it.asDomain() }
+            else -> database.scheduleDao().getScheduleWeekdayMoscowAll().map { it.asDomain() }
+        }
+    }
+
+    override suspend fun refreshScheduleTomorrowMoscowOdintsovo() {
+        scheduleMoscow = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            7 -> database.scheduleDao().getScheduleSundayMoscowOdn().map { it.asDomain() }
+            6 -> database.scheduleDao().getScheduleSaturdayMoscowOdn().map { it.asDomain() }
+            else -> database.scheduleDao().getScheduleWeekdayMoscowOdn().map { it.asDomain() }
+        }
+    }
+
+    override suspend fun refreshScheduleTomorrowMoscowSlavyanka() {
+        scheduleMoscow = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            7 -> database.scheduleDao().getScheduleSundayMoscowSlv().map { it.asDomain() }
+            6 -> database.scheduleDao().getScheduleSaturdayMoscowSlv().map { it.asDomain() }
+            else -> database.scheduleDao().getScheduleWeekdayMoscowSlv().map { it.asDomain() }
+        }
+    }
+
+    override suspend fun refreshScheduleTomorrowMoscowMolodezhnaya() {
+        scheduleMoscow = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            7 -> database.scheduleDao().getScheduleSundayMoscowMld().map { it.asDomain() }
+            6 -> database.scheduleDao().getScheduleSaturdayMoscowMld().map { it.asDomain() }
+            else -> database.scheduleDao().getScheduleWeekdayMoscowMld().map { it.asDomain() }
+        }
+    }
+
 
     override suspend fun refreshScheduleWeekdayMoscowAll() {
         scheduleMoscow = database.scheduleDao().getScheduleWeekdayMoscowAll().map { it.asDomain() }
@@ -127,7 +161,7 @@ class DefaultScheduleRepository @Inject constructor(
     override suspend fun refreshScheduleTodayDubkiAll() {
         scheduleDubki = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             1 -> database.scheduleDao().getScheduleSundayDubkiAll().map { it.asDomainWithTime() }
-            2 -> database.scheduleDao().getScheduleSaturdayDubkiAll().map { it.asDomainWithTime() }
+            7 -> database.scheduleDao().getScheduleSaturdayDubkiAll().map { it.asDomainWithTime() }
             else -> database.scheduleDao().getScheduleWeekdayDubkiAll().map { it.asDomainWithTime() }
         }
     }
@@ -155,6 +189,40 @@ class DefaultScheduleRepository @Inject constructor(
             else -> database.scheduleDao().getScheduleWeekdayDubkiMld().map { it.asDomainWithTime() }
         }
     }
+
+
+    override suspend fun refreshScheduleTomorrowDubkiAll() {
+        scheduleDubki = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            7 -> database.scheduleDao().getScheduleSundayDubkiAll().map { it.asDomain() }
+            6 -> database.scheduleDao().getScheduleSaturdayDubkiAll().map { it.asDomain() }
+            else -> database.scheduleDao().getScheduleWeekdayDubkiAll().map { it.asDomain() }
+        }
+    }
+
+    override suspend fun refreshScheduleTomorrowDubkiOdintsovo() {
+        scheduleDubki = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            7 -> database.scheduleDao().getScheduleSundayDubkiOdn().map { it.asDomain() }
+            6 -> database.scheduleDao().getScheduleSaturdayDubkiOdn().map { it.asDomain() }
+            else -> database.scheduleDao().getScheduleWeekdayDubkiOdn().map { it.asDomain() }
+        }
+    }
+
+    override suspend fun refreshScheduleTomorrowDubkiSlavyanka() {
+        scheduleDubki = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            7 -> database.scheduleDao().getScheduleSundayDubkiSlv().map { it.asDomain() }
+            6 -> database.scheduleDao().getScheduleSaturdayDubkiSlv().map { it.asDomain() }
+            else -> database.scheduleDao().getScheduleWeekdayDubkiSlv().map { it.asDomain() }
+        }
+    }
+
+    override suspend fun refreshScheduleTomorrowDubkiMolodezhnaya() {
+        scheduleDubki = when(Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            7 -> database.scheduleDao().getScheduleSundayDubkiMld().map { it.asDomain() }
+            6 -> database.scheduleDao().getScheduleSaturdayDubkiMld().map { it.asDomain() }
+            else -> database.scheduleDao().getScheduleWeekdayDubkiMld().map { it.asDomain() }
+        }
+    }
+
 
     override suspend fun refreshScheduleWeekdayDubkiAll() {
         scheduleDubki = database.scheduleDao().getScheduleWeekdayDubkiAll().map { it.asDomain() }

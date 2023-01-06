@@ -3,6 +3,8 @@ package com.example.dubkiapp.ui.schedule
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +42,10 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var scheduleTodayMoscowOdintsovoAdapter: ScheduleAdapter
     private lateinit var scheduleTodayMoscowSlavyankaAdapter: ScheduleAdapter
     private lateinit var scheduleTodayMoscowMolodezhnayaAdapter: ScheduleAdapter
+    private lateinit var scheduleTomorrowMoscowAllAdapter: ScheduleAdapter
+    private lateinit var scheduleTomorrowMoscowOdintsovoAdapter: ScheduleAdapter
+    private lateinit var scheduleTomorrowMoscowSlavyankaAdapter: ScheduleAdapter
+    private lateinit var scheduleTomorrowMoscowMolodezhnayaAdapter: ScheduleAdapter
     private lateinit var scheduleWeekdayMoscowAllAdapter: ScheduleAdapter
     private lateinit var scheduleWeekdayMoscowOdintsovoAdapter: ScheduleAdapter
     private lateinit var scheduleWeekdayMoscowSlavyankaAdapter: ScheduleAdapter
@@ -57,6 +63,10 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var scheduleTodayDubkiOdintsovoAdapter: ScheduleAdapter
     private lateinit var scheduleTodayDubkiSlavyankaAdapter: ScheduleAdapter
     private lateinit var scheduleTodayDubkiMolodezhnayaAdapter: ScheduleAdapter
+    private lateinit var scheduleTomorrowDubkiAllAdapter: ScheduleAdapter
+    private lateinit var scheduleTomorrowDubkiOdintsovoAdapter: ScheduleAdapter
+    private lateinit var scheduleTomorrowDubkiSlavyankaAdapter: ScheduleAdapter
+    private lateinit var scheduleTomorrowDubkiMolodezhnayaAdapter: ScheduleAdapter
     private lateinit var scheduleWeekdayDubkiAllAdapter: ScheduleAdapter
     private lateinit var scheduleWeekdayDubkiOdintsovoAdapter: ScheduleAdapter
     private lateinit var scheduleWeekdayDubkiSlavyankaAdapter: ScheduleAdapter
@@ -72,9 +82,9 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
     private var dayDirectionStation = MutableLiveData<List<Char>>()
-    private var day = ""
-    private var station = ""
-    private var direction = "m"
+    private var day = '-'
+    private var station = '-'
+    private var direction = 'm'
     private var start = true
 
     override fun onAttach(context: Context) {
@@ -94,7 +104,6 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         tabLayout = binding.tabs
 
@@ -139,6 +148,10 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         scheduleTodayMoscowOdintsovoAdapter = ScheduleAdapter()
         scheduleTodayMoscowSlavyankaAdapter = ScheduleAdapter()
         scheduleTodayMoscowMolodezhnayaAdapter = ScheduleAdapter()
+        scheduleTomorrowMoscowAllAdapter = ScheduleAdapter()
+        scheduleTomorrowMoscowOdintsovoAdapter = ScheduleAdapter()
+        scheduleTomorrowMoscowSlavyankaAdapter = ScheduleAdapter()
+        scheduleTomorrowMoscowMolodezhnayaAdapter = ScheduleAdapter()
         scheduleWeekdayMoscowAllAdapter = ScheduleAdapter()
         scheduleWeekdayMoscowOdintsovoAdapter = ScheduleAdapter()
         scheduleWeekdayMoscowSlavyankaAdapter = ScheduleAdapter()
@@ -156,6 +169,10 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         scheduleTodayDubkiOdintsovoAdapter = ScheduleAdapter()
         scheduleTodayDubkiSlavyankaAdapter = ScheduleAdapter()
         scheduleTodayDubkiMolodezhnayaAdapter = ScheduleAdapter()
+        scheduleTomorrowDubkiAllAdapter = ScheduleAdapter()
+        scheduleTomorrowDubkiOdintsovoAdapter = ScheduleAdapter()
+        scheduleTomorrowDubkiSlavyankaAdapter = ScheduleAdapter()
+        scheduleTomorrowDubkiMolodezhnayaAdapter = ScheduleAdapter()
         scheduleWeekdayDubkiAllAdapter = ScheduleAdapter()
         scheduleWeekdayDubkiOdintsovoAdapter = ScheduleAdapter()
         scheduleWeekdayDubkiSlavyankaAdapter = ScheduleAdapter()
@@ -174,12 +191,12 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when(tab.position) {
                     0 -> {
-                        direction = "m"
-                        dayDirectionStation.value = listOf(day[0], direction[0], station[0])
+                        direction = 'm'
+                        dayDirectionStation.value = listOf(day, direction, station)
                     }
                     else -> {
-                        direction = "d"
-                        dayDirectionStation.value = listOf(day[0], direction[0], station[0])
+                        direction = 'd'
+                        dayDirectionStation.value = listOf(day, direction, station)
                     }
                 }
             }
@@ -225,6 +242,24 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
             nextTodayMoscowMolodezhnayaBus = it.second
             Log.d(TAG, "hereResult: ${it.first}")
         }
+
+        viewModel.scheduleTomorrowMoscowAll.observe(viewLifecycleOwner) {
+            scheduleTomorrowMoscowAllAdapter.submitList(it)
+            Log.d(TAG, "hereResult: $it")
+        }
+        viewModel.scheduleTomorrowMoscowOdintsovo.observe(viewLifecycleOwner) {
+            scheduleTomorrowMoscowOdintsovoAdapter.submitList(it)
+            Log.d(TAG, "hereResult: $it")
+        }
+        viewModel.scheduleTomorrowMoscowSlavyanka.observe(viewLifecycleOwner) {
+            scheduleTomorrowMoscowSlavyankaAdapter.submitList(it)
+            Log.d(TAG, "hereResult: $it")
+        }
+        viewModel.scheduleTomorrowMoscowMolodezhnaya.observe(viewLifecycleOwner) {
+            scheduleTomorrowMoscowMolodezhnayaAdapter.submitList(it)
+            Log.d(TAG, "hereResult: $it")
+        }
+
         viewModel.scheduleWeekdayMoscowAll.observe(viewLifecycleOwner) {
             scheduleWeekdayMoscowAllAdapter.submitList(it)
             Log.d(TAG, "hereResult: $it")
@@ -295,6 +330,23 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
             nextTodayDubkiMolodezhnayaBus = it.second
             Log.d(TAG, "hereResult: ${it.first}")
         }
+
+        viewModel.scheduleTomorrowDubkiAll.observe(viewLifecycleOwner) {
+            scheduleTomorrowDubkiAllAdapter.submitList(it)
+            Log.d(TAG, "hereResult: $it")
+        }
+        viewModel.scheduleTomorrowDubkiOdintsovo.observe(viewLifecycleOwner) {
+            scheduleTomorrowDubkiOdintsovoAdapter.submitList(it)
+            Log.d(TAG, "hereResult: $it")
+        }
+        viewModel.scheduleTomorrowDubkiSlavyanka.observe(viewLifecycleOwner) {
+            scheduleTomorrowDubkiSlavyankaAdapter.submitList(it)
+            Log.d(TAG, "hereResult: $it")
+        }
+        viewModel.scheduleTomorrowDubkiMolodezhnaya.observe(viewLifecycleOwner) {
+            scheduleTomorrowDubkiMolodezhnayaAdapter.submitList(it)
+            Log.d(TAG, "hereResult: $it")
+        }
         viewModel.scheduleWeekdayDubkiAll.observe(viewLifecycleOwner) {
             scheduleWeekdayDubkiAllAdapter.submitList(it)
         }
@@ -336,43 +388,43 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         dayDirectionStation.observe(viewLifecycleOwner) {
             it?.let {
                 when(day) {
-                    "c" -> {
+                    'c' -> {
                         when(direction) {
-                            "m" -> {
+                            'm' -> {
                                 when(station) {
-                                    "a" -> {
+                                    'a' -> {
                                         binding.recyclerSchedule.adapter = scheduleTodayMoscowAllAdapter
                                         (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayMoscowAllBus)
                                     }
-                                    "m" -> {
+                                    'm' -> {
                                         binding.recyclerSchedule.adapter = scheduleTodayMoscowMolodezhnayaAdapter
                                         (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayMoscowMolodezhnayaBus)
                                     }
-                                    "s" -> {
+                                    's' -> {
                                         binding.recyclerSchedule.adapter = scheduleTodayMoscowSlavyankaAdapter
                                         (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayMoscowSlavyankaBus)
                                     }
-                                    "o" -> {
+                                    'o' -> {
                                         binding.recyclerSchedule.adapter = scheduleTodayMoscowOdintsovoAdapter
                                         (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayMoscowOdintsovoBus)
                                     }
                                 }
                             }
-                            "d" -> {
+                            'd' -> {
                                 when(station) {
-                                    "a" -> {
+                                    'a' -> {
                                         binding.recyclerSchedule.adapter = scheduleTodayDubkiAllAdapter
                                         (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayDubkiAllBus)
                                     }
-                                    "m" -> {
+                                    'm' -> {
                                         binding.recyclerSchedule.adapter = scheduleTodayDubkiMolodezhnayaAdapter
                                         (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayDubkiMolodezhnayaBus)
                                     }
-                                    "s" -> {
+                                    's' -> {
                                         binding.recyclerSchedule.adapter = scheduleTodayDubkiSlavyankaAdapter
                                         (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayDubkiSlavyankaBus)
                                     }
-                                    "o" -> {
+                                    'o' -> {
                                         binding.recyclerSchedule.adapter = scheduleTodayDubkiOdintsovoAdapter
                                         (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayDubkiOdintsovoBus)
                                     }
@@ -380,72 +432,72 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             }
                         }
                     }
-                    "t" -> {
+                    't' -> {
                         when(direction) {
-                            "m" -> {
+                            'm' -> {
                                 when(station) {
-                                    "a" -> {
-
+                                    'a' -> {
+                                        binding.recyclerSchedule.adapter = scheduleTomorrowMoscowAllAdapter
                                     }
-                                    "m" -> {
-
+                                    'm' -> {
+                                        binding.recyclerSchedule.adapter = scheduleTomorrowMoscowMolodezhnayaAdapter
                                     }
-                                    "s" -> {
-
+                                    's' -> {
+                                        binding.recyclerSchedule.adapter = scheduleTomorrowMoscowSlavyankaAdapter
                                     }
-                                    "o" -> {
-
+                                    'o' -> {
+                                        binding.recyclerSchedule.adapter = scheduleTomorrowMoscowOdintsovoAdapter
                                     }
                                 }
                             }
-                            "d" -> {
+                            'd' -> {
                                 when(station) {
-                                    "a" -> {
-
+                                    'a' -> {
+                                        binding.recyclerSchedule.adapter = scheduleTomorrowDubkiAllAdapter
                                     }
-                                    "m" -> {
-
+                                    'm' -> {
+                                        binding.recyclerSchedule.adapter = scheduleTomorrowDubkiMolodezhnayaAdapter
                                     }
-                                    "s" -> {
-
+                                    's' -> {
+                                        binding.recyclerSchedule.adapter = scheduleTomorrowDubkiSlavyankaAdapter
                                     }
-                                    "o" -> {
-
+                                    'o' -> {
+                                        binding.recyclerSchedule.adapter = scheduleTomorrowDubkiOdintsovoAdapter
                                     }
                                 }
                             }
                         }
                     }
-                    "w" -> {
+                    'w' -> {
                         when(direction) {
-                            "m" -> {
+                            'm' -> {
                                 when(station) {
-                                    "a" -> {
+                                    'a' -> {
                                         binding.recyclerSchedule.adapter = scheduleWeekdayMoscowAllAdapter
                                     }
-                                    "m" -> {
+                                    'm' -> {
                                         binding.recyclerSchedule.adapter = scheduleWeekdayMoscowMolodezhnayaAdapter
                                     }
-                                    "s" -> {
+                                    's' -> {
                                         binding.recyclerSchedule.adapter = scheduleWeekdayMoscowSlavyankaAdapter
                                     }
-                                    "o" -> {
+                                    'o' -> {
                                         binding.recyclerSchedule.adapter = scheduleWeekdayMoscowOdintsovoAdapter
                                     }
                                 }
                             }
-                            "d" -> {
+                            'd' -> {
                                 when(station) {
-                                    "a" -> {
+                                    'a' -> {
                                         binding.recyclerSchedule.adapter = scheduleWeekdayDubkiAllAdapter
                                     }
-                                    "m" -> {
+                                    'm' -> {
                                         binding.recyclerSchedule.adapter = scheduleWeekdayDubkiMolodezhnayaAdapter
                                     }
-                                    "s" -> {
+                                    's' -> {
                                         binding.recyclerSchedule.adapter = scheduleWeekdayDubkiSlavyankaAdapter
                                     }
-                                    "o" -> {
+                                    'o' -> {
                                         binding.recyclerSchedule.adapter = scheduleWeekdayDubkiOdintsovoAdapter
                                     }
 
@@ -453,72 +505,72 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             }
                         }
                     }
-                    "s" -> {
+                    's' -> {
                         when(direction) {
-                            "m" -> {
+                            'm' -> {
                                 when(station) {
-                                    "a" -> {
+                                    'a' -> {
                                         binding.recyclerSchedule.adapter = scheduleSaturdayMoscowAllAdapter
                                     }
-                                    "m" -> {
+                                    'm' -> {
                                         binding.recyclerSchedule.adapter = scheduleSaturdayMoscowMolodezhnayaAdapter
                                     }
-                                    "s" -> {
+                                    's' -> {
                                         binding.recyclerSchedule.adapter = scheduleSaturdayMoscowSlavyankaAdapter
                                     }
-                                    "o" -> {
+                                    'o' -> {
                                         binding.recyclerSchedule.adapter = scheduleSaturdayMoscowOdintsovoAdapter
                                     }
                                 }
                             }
-                            "d" -> {
+                            'd' -> {
                                 when(station) {
-                                    "a" -> {
+                                    'a' -> {
                                         binding.recyclerSchedule.adapter = scheduleSaturdayDubkiAllAdapter
                                     }
-                                    "m" -> {
+                                    'm' -> {
                                         binding.recyclerSchedule.adapter = scheduleSaturdayDubkiMolodezhnayaAdapter
                                     }
-                                    "s" -> {
+                                    's' -> {
                                         binding.recyclerSchedule.adapter = scheduleSaturdayDubkiSlavyankaAdapter
                                     }
-                                    "o" -> {
+                                    'o' -> {
                                         binding.recyclerSchedule.adapter = scheduleSaturdayDubkiOdintsovoAdapter
                                     }
                                 }
                             }
                         }
                     }
-                    "n" -> {
+                    'n' -> {
                         when(direction) {
-                            "m" -> {
+                            'm' -> {
                                 when(station) {
-                                    "a" -> {
+                                    'a' -> {
                                         binding.recyclerSchedule.adapter = scheduleSundayMoscowAllAdapter
                                     }
-                                    "m" -> {
+                                    'm' -> {
                                         binding.recyclerSchedule.adapter = scheduleSundayMoscowMolodezhnayaAdapter
                                     }
-                                    "s" -> {
+                                    's' -> {
                                         binding.recyclerSchedule.adapter = scheduleSundayMoscowSlavyankaAdapter
                                     }
-                                    "o" -> {
+                                    'o' -> {
                                         binding.recyclerSchedule.adapter = scheduleSundayMoscowOdintsovoAdapter
                                     }
                                 }
                             }
-                            "d" -> {
+                            'd' -> {
                                 when(station) {
-                                    "a" -> {
+                                    'a' -> {
                                         binding.recyclerSchedule.adapter = scheduleSundayDubkiAllAdapter
                                     }
-                                    "m" -> {
+                                    'm' -> {
                                         binding.recyclerSchedule.adapter = scheduleSundayDubkiMolodezhnayaAdapter
                                     }
-                                    "s" -> {
+                                    's' -> {
                                         binding.recyclerSchedule.adapter = scheduleSundayDubkiSlavyankaAdapter
                                     }
-                                    "o" -> {
+                                    'o' -> {
                                         binding.recyclerSchedule.adapter = scheduleSundayDubkiOdintsovoAdapter
                                     }
                                 }
@@ -530,52 +582,49 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         tabLayout.addOnTabSelectedListener(onTabSelectedListener)
-
-
-//        lifecycleScope.launch(Dispatchers.IO) {
-//            viewModel.getSchedule("wkd", "odn")
-//        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        Log.d(TAG, "ONDESTROY")
+        direction = 'm'
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         when(parent.getItemAtPosition(pos)) {
             "Все станции" -> {
-                station = "a"
+                station = 'a'
             }
             "Молодежная" -> {
-                station = "m"
+                station = 'm'
             }
             "Славянский б-р" -> {
-                station = "s"
+                station = 's'
             }
             "Одинцово" -> {
-                station = "o"
+                station = 'o'
             }
 
             "Сегодня" -> {
-                day = "c"
+                day = 'c'
             }
             "Завтра" -> {
-                day = "t"
+                day = 't'
             }
             "Будни" -> {
-                day = "w"
+                day = 'w'
             }
             "Суббота" -> {
-                day = "s"
+                day = 's'
             }
             "Воскресенье" -> {
-                day = "n"
+                day = 'n'
             }
         }
 
-        if (day != "" && station != "") {
-            dayDirectionStation.value = listOf(day[0], direction[0], station[0])
+        if (day != '-' && station != '-') {
+            dayDirectionStation.value = listOf(day, direction, station)
             Log.d(TAG, "$day, $direction, $station")
         }
 
