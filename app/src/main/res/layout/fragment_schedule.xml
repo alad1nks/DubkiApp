@@ -41,7 +41,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@color/white"/>
+                    android:background="@drawable/spinner_day_station_bg"/>
 
                 <Spinner
                     android:id="@+id/day_spinner"
@@ -50,7 +50,7 @@
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@color/white" />
+                    android:background="@drawable/spinner_day_station_bg" />
             </LinearLayout>
 
 

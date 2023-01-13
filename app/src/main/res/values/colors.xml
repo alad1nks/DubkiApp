@@ -9,11 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue_schedule">#538dd9</color>
     <color name="green_schedule">#119A00</color>
-    <color name="apricot">#dcd9a6</color>
     <color name="green">#32932a</color>
     <color name="green_light">#0f7738</color>
     <color name="red">#FF413C</color>
     <color name="grey">#1A000000</color>
+    <color name="grey_dark">#66FFFFFF</color>
     <color name="grey_used">#B3000000</color>
+    <color name="black_bg">#212121</color>
     <color name="purple">#7839FF</color>
 </resources>

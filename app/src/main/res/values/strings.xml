@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Дубовозки</string>
     <string name="title_settings_rus">Настройки</string>
-    <string name="title_market_rus">Маркет</string>
+    <string name="title_market_rus">Сервисы</string>
     <string name="title_schedule_rus">Расписание</string>
     <string name="title_to_moscow_rus">В Москву</string>
     <string name="title_to_dubki_rus">В Дубки</string>
@@ -9,6 +9,8 @@
     <string name="gone">%1$d ч %2$d мин назад</string>
     <string name="coming_soon">через %1$d мин</string>
     <string name="coming">через %1$d ч %2$d мин</string>
+    <string name="title_decor">Оформление</string>
+    <string name="title_dark_theme">Темная тема</string>
 
     <string-array name="stations_array">
         <item>Все станции</item>

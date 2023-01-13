@@ -4,9 +4,9 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/black_bg</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/purple</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
@@ -68,19 +68,19 @@
 
     <style name="TextAppearance.Medium.DayTime.Gone" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">28sp</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">@color/grey_dark</item>
         <item name="android:fontFamily">@font/hse_sans</item>
     </style>
 
     <style name="TextAppearance.Medium.InTime.Gone" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">@color/grey_dark</item>
         <item name="android:fontFamily">@font/hse_sans</item>
     </style>
 
     <style name="TextAppearance.Medium.Station.Gone" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">@color/grey_dark</item>
         <item name="android:fontFamily">@font/hse_sans</item>
     </style>
 
