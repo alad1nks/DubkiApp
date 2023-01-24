@@ -11,6 +11,10 @@
     <string name="coming">через %1$d ч %2$d мин</string>
     <string name="title_decor">Оформление</string>
     <string name="title_dark_theme">Темная тема</string>
+    <string name="leisure_booking">Бронь досуговых</string>
+    <string name="speed_dating">Быстрые свидания</string>
+    <string name="support_the_authors">Поддержать авторов</string>
+    <string name="contact_the_developer">Связаться с разработчиком</string>
 
     <string-array name="stations_array">
         <item>Все станции</item>

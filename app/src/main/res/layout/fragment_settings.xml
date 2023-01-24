@@ -7,24 +7,24 @@
     tools:context=".ui.settings.SettingsFragment"
     android:orientation="vertical">
     <TextView
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_decor"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:fontFamily="@font/hse_sans"
         android:textColor="@color/purple"
         android:textStyle="bold"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/themeSwitch"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_dark_theme"
-        android:textSize="18sp"
+        android:textSize="17sp"
         android:fontFamily="@font/hse_sans"/>
 
 </LinearLayout>

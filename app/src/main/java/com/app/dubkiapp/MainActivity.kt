@@ -1,9 +1,7 @@
 package com.app.dubkiapp
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
@@ -65,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_schedule,
-                R.id.navigation_dashboard,
+                R.id.navigation_services,
                 R.id.navigation_settings
             )
         )

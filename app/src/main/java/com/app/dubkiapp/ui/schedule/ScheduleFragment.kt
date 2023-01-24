@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -17,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.dubkiapp.R
 import com.app.dubkiapp.databinding.FragmentScheduleBinding
-import com.app.dubkiapp.preferences.AppPreference
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import javax.inject.Inject
@@ -104,6 +104,11 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tabLayout = binding.tabs
+
+        when(start) {
+            false -> binding.progressBar.visibility = GONE
+            else -> {}
+        }
 
         context?.let {
             ArrayAdapter.createFromResource(
@@ -222,6 +227,7 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(nextTodayMoscowAllBus)
                 Log.d(TAG, "nextMoscowBus $nextTodayMoscowAllBus")
                 start = false
+                binding.progressBar.visibility = GONE
             }
             Log.d(TAG, "hereResult: ${it.first}")
         }
@@ -626,24 +632,6 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
             Log.d(TAG, "$day, $direction, $station")
         }
 
-//        when(day) {
-//            "cur" -> {
-//                viewModel.getScheduleTodayAll()
-//                Log.d(TAG, "cur")
-//            }
-//            "wkd" -> {
-//                viewModel.getScheduleWeekdayAll()
-//                Log.d(TAG, "wkd")
-//            }
-//            "std" -> {
-//                viewModel.getScheduleSaturdayAll()
-//                Log.d(TAG, "std")
-//            }
-//            "snd" -> {
-//                viewModel.getScheduleSundayAll()
-//                Log.d(TAG, "snd")
-//            }
-//        }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

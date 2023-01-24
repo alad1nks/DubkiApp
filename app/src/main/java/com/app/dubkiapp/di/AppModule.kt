@@ -34,8 +34,8 @@ object AppModule {
     }
 
 
-
     @Provides
     @Singleton
     fun provideFirebaseDatabase(): FirebaseDatabase = FirebaseDatabase.getInstance()
+
 }

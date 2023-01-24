@@ -14,6 +14,7 @@
     <color name="red">#FF413C</color>
     <color name="grey">#1A000000</color>
     <color name="grey_dark">#66FFFFFF</color>
+    <color name="grey_10">#1AFFFFFF</color>
     <color name="grey_used">#B3000000</color>
     <color name="black_bg">#212121</color>
     <color name="purple">#7839FF</color>

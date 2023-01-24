@@ -32,7 +32,6 @@ class SignInActivity : AppCompatActivity() {
             val signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setLogo(R.mipmap.ic_launcher)
-                //.setTheme(R.style.LoginTheme)
                 .setAvailableProviders(listOf(
                     AuthUI.IdpConfig.EmailBuilder().build(),
                     AuthUI.IdpConfig.GoogleBuilder().build(),

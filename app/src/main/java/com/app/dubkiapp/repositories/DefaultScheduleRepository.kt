@@ -14,9 +14,11 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeoutOrNull
 import java.util.Calendar
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 
+@Singleton
 class DefaultScheduleRepository @Inject constructor(
     private val realtimeDatabase: FirebaseDatabase,
     private val database: ScheduleDatabase,

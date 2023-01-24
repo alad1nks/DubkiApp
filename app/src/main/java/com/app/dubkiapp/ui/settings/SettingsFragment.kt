@@ -50,7 +50,7 @@ class SettingsFragment : Fragment() {
             else -> themeSwitch.isChecked = true
         }
 
-        themeSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        themeSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 appPreference.setTheme("dark")
                 AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
@@ -59,7 +59,7 @@ class SettingsFragment : Fragment() {
                 appPreference.setTheme("light")
                 AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
             }
-        })
+        }
         Log.d(TAG, "onViewCreated")
     }
 

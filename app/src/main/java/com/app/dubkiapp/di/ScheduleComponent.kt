@@ -1,6 +1,5 @@
 package com.app.dubkiapp.di
 
-
 import com.app.dubkiapp.ui.schedule.ScheduleFragment
 import dagger.Subcomponent
 
