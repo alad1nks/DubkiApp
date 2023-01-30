@@ -14,7 +14,7 @@ class DefaultServicesRepository @Inject constructor(
 ): ServicesRepository {
     private val services = listOf(
         Service(
-            stringResourceId = R.string.leisure_booking,
+            stringResourceId = R.string.title_leisure_booking,
             imageResourceId = R.drawable.baseline_calendar,
             onClick = {
                 Toast.makeText(context, "Скоро добавим!", Toast.LENGTH_SHORT).show()
@@ -22,7 +22,7 @@ class DefaultServicesRepository @Inject constructor(
         ),
 
         Service(
-            stringResourceId = R.string.speed_dating,
+            stringResourceId = R.string.title_speed_dating,
             imageResourceId = R.drawable.baseline_like,
             onClick = {
                 Toast.makeText(context, "Скоро добавим!", Toast.LENGTH_SHORT).show()
@@ -30,7 +30,7 @@ class DefaultServicesRepository @Inject constructor(
         ),
 
         Service(
-            stringResourceId = R.string.support_the_authors,
+            stringResourceId = R.string.title_support_the_authors,
             imageResourceId = R.drawable.baseline_ruble,
             onClick = {
                 val uri = Uri.parse("https://tips.yandex.ru/guest/payment/1019090")
@@ -41,7 +41,7 @@ class DefaultServicesRepository @Inject constructor(
         ),
 
         Service(
-            stringResourceId = R.string.contact_the_developer,
+            stringResourceId = R.string.title_contact_the_developer,
             imageResourceId = R.drawable.baseline_message_24,
             onClick = {
                 val uri = Uri.parse("https://t.me/asteslenko")

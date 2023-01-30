@@ -5,16 +5,21 @@
     <string name="title_schedule_rus">Расписание</string>
     <string name="title_to_moscow_rus">В Москву</string>
     <string name="title_to_dubki_rus">В Дубки</string>
+
     <string name="gone_soon">%1$d мин назад</string>
-    <string name="gone">%1$d ч %2$d мин назад</string>
+    <string name="gone">%2$d ч %1$d мин назад</string>
     <string name="coming_soon">через %1$d мин</string>
-    <string name="coming">через %1$d ч %2$d мин</string>
+    <string name="coming">через %2$d ч %1$d мин</string>
+    <string name="odintsovo">Одинцово</string>
+    <string name="slavyanka">Славянский б-р</string>
+    <string name="molodezhnaya">Молодежная</string>
+
     <string name="title_decor">Оформление</string>
     <string name="title_dark_theme">Темная тема</string>
-    <string name="leisure_booking">Бронь досуговых</string>
-    <string name="speed_dating">Быстрые свидания</string>
-    <string name="support_the_authors">Поддержать авторов</string>
-    <string name="contact_the_developer">Связаться с разработчиком</string>
+    <string name="title_leisure_booking">Бронь досуговых</string>
+    <string name="title_speed_dating">Быстрые свидания</string>
+    <string name="title_support_the_authors">Поддержать авторов</string>
+    <string name="title_contact_the_developer">Связаться с разработчиком</string>
 
     <string-array name="stations_array">
         <item>Все станции</item>
