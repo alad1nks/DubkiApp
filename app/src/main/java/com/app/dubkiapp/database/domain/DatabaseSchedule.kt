@@ -19,14 +19,16 @@ data class DatabaseSchedule(
 
 fun DatabaseSchedule.asDomainWithTime(): Bus {
     val inTime = (dayTime!! - (Calendar.getInstance().timeInMillis + 10800000) % 86400000) / 60000
-    val inTimeMinutes = inTime % 60
-    val inTimeHours = inTime / 60
+    val inTimeMinutes = kotlin.math.abs(inTime % 60)
+    val inTimeHours = kotlin.math.abs(inTime / 60)
     val dayTimeStyleResId: Int?
     val inTimeStringResId: Int?
     val inTimeStyleResId: Int?
     val inTimeDrawableResId: Int?
     val stationStringResId: Int?
     val stationStyleResId: Int?
+    var dayTimeGone:Int? = null
+    var stationGone: Int? = null
 
     if (inTime / 60 > 0) {
         inTimeStringResId = R.string.coming
@@ -44,27 +46,31 @@ fun DatabaseSchedule.asDomainWithTime(): Bus {
         inTimeStringResId = R.string.gone
         inTimeStyleResId = R.style.TextAppearance_Medium_InTime_Gone
         inTimeDrawableResId = R.drawable.in_time_bus_common_bg
+        dayTimeGone = R.style.TextAppearance_Medium_DayTime_Gone
+        stationGone = R.style.TextAppearance_Medium_Station_Gone
     } else {
         inTimeStringResId = R.string.gone_soon
         inTimeStyleResId = R.style.TextAppearance_Medium_InTime_Gone
         inTimeDrawableResId = R.drawable.in_time_bus_common_bg
+        dayTimeGone = R.style.TextAppearance_Medium_DayTime_Gone
+        stationGone = R.style.TextAppearance_Medium_Station_Gone
     }
 
     when (station!!) {
         "odn" -> {
-            dayTimeStyleResId = R.style.TextAppearance_Medium_DayTime_Odintsovo
+            dayTimeStyleResId = dayTimeGone ?: R.style.TextAppearance_Medium_DayTime_Odintsovo
             stationStringResId = R.string.odintsovo
-            stationStyleResId = R.style.TextAppearance_Medium_Station_Odintsovo
+            stationStyleResId = stationGone ?: R.style.TextAppearance_Medium_Station_Odintsovo
         }
         "slv" -> {
-            dayTimeStyleResId = R.style.TextAppearance_Medium_DayTime_Slavyanka
+            dayTimeStyleResId = dayTimeGone ?: R.style.TextAppearance_Medium_DayTime_Slavyanka
             stationStringResId = R.string.slavyanka
-            stationStyleResId = R.style.TextAppearance_Medium_Station_Slavyanka
+            stationStyleResId = stationGone ?: R.style.TextAppearance_Medium_Station_Slavyanka
         }
         else -> {
-            dayTimeStyleResId = R.style.TextAppearance_Medium_DayTime_Molodyozhnaya
+            dayTimeStyleResId = dayTimeGone ?: R.style.TextAppearance_Medium_DayTime_Molodyozhnaya
             stationStringResId = R.string.molodezhnaya
-            stationStyleResId = R.style.TextAppearance_Medium_Station_Molodyozhnaya
+            stationStyleResId = stationGone ?: R.style.TextAppearance_Medium_Station_Molodyozhnaya
         }
     }
 

@@ -21,7 +21,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDailyWeatherDatabase(context: Context): ScheduleDatabase {
+    fun provideScheduleDatabase(context: Context): ScheduleDatabase {
         synchronized(ScheduleDatabase::class.java) {
             if (!::INSTANCESCHEDULE.isInitialized) {
                 INSTANCESCHEDULE = Room.databaseBuilder(context.applicationContext,
