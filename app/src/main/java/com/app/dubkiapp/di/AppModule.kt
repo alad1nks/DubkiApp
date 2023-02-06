@@ -13,11 +13,11 @@ import javax.inject.Singleton
 object AppModule {
     private lateinit var INSTANCESCHEDULE: ScheduleDatabase
 
-    @Provides
-    @Singleton
-    fun provideSharedPreference(context: Context): SharedPreferences {
-        return context.getSharedPreferences("dagger-pref", Context.MODE_PRIVATE)
-    }
+//    @Provides
+//    @Singleton
+//    fun provideSharedPreference(context: Context): SharedPreferences {
+//        return context.getSharedPreferences("dagger-pref", Context.MODE_PRIVATE)
+//    }
 
     @Provides
     @Singleton

@@ -10,8 +10,8 @@ class AppPreferenceImpl @Inject constructor(context: Context): AppPreference {
         const val THEME = "theme"
     }
 
-    private var preference = context.getSharedPreferences("dagger-pref", Context.MODE_PRIVATE)
-    private var editor = preference.edit()
+    private val preference = context.getSharedPreferences("dagger-pref", Context.MODE_PRIVATE)
+    private val editor = preference.edit()
 
 
     private fun saveString(key: String, value: String) {

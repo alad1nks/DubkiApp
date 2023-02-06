@@ -1,6 +1,7 @@
 package com.app.dubkiapp.di
 
 import com.app.dubkiapp.ui.schedule.ScheduleFragment
+import com.app.dubkiapp.ui.schedule.ScheduleMoscowFragment
 import dagger.Subcomponent
 
 @Subcomponent(
@@ -15,4 +16,5 @@ interface ScheduleComponent {
     }
 
     fun inject(fragment: ScheduleFragment)
+    fun inject(fragment: ScheduleMoscowFragment)
 }

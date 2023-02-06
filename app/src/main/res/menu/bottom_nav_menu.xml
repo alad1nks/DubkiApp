@@ -4,16 +4,16 @@
     <item
         android:id="@+id/navigation_schedule"
         android:icon="@drawable/baseline_directions_bus_24"
-        android:title="@string/title_schedule_rus" />
+        android:title="@string/title_schedule" />
 
     <item
         android:id="@+id/navigation_services"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_market_rus" />
+        android:title="@string/title_market" />
 
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/baseline_settings_24"
-        android:title="@string/title_settings_rus" />
+        android:title="@string/title_settings" />
 
 </menu>

@@ -285,6 +285,7 @@ class DefaultScheduleRepository @Inject constructor(
     }
 
     override suspend fun getScheduleMoscow(): List<Bus> {
+        Log.d("getMoscow", "$scheduleMoscow")
         return scheduleMoscow
     }
 

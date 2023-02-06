@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Дубовозки</string>
-    <string name="title_settings_rus">Настройки</string>
-    <string name="title_market_rus">Сервисы</string>
-    <string name="title_schedule_rus">Расписание</string>
-    <string name="title_to_moscow_rus">В Москву</string>
-    <string name="title_to_dubki_rus">В Дубки</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_market">Сервисы</string>
+    <string name="title_schedule">Расписание</string>
+    <string name="title_to_moscow">В Москву</string>
+    <string name="title_to_dubki">В Дубки</string>
 
     <string name="gone_soon">%1$d мин назад</string>
     <string name="gone">%2$d ч %1$d мин назад</string>
