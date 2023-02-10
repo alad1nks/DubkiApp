@@ -1,4 +1,4 @@
-package com.app.dubkiapp.ui.settings
+package com.app.dubkiapp.ui.view
 
 import android.content.ContentValues.TAG
 import android.content.Context

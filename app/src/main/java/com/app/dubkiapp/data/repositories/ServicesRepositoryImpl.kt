@@ -1,15 +1,16 @@
-package com.app.dubkiapp.repositories
+package com.app.dubkiapp.data.repositories
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import com.app.dubkiapp.R
-import com.app.dubkiapp.domain.Service
+import com.app.dubkiapp.ui.model.Service
+import com.app.dubkiapp.domain.repositories.ServicesRepository
 import javax.inject.Inject
 
 
-class DefaultServicesRepository @Inject constructor(
+class ServicesRepositoryImpl @Inject constructor(
     context: Context
 ): ServicesRepository {
     private val services = listOf(

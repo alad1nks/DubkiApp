@@ -1,8 +1,8 @@
 package com.app.dubkiapp.di
 
 import android.content.Context
-import com.app.dubkiapp.repositories.ScheduleRepository
-import com.app.dubkiapp.repositories.ServicesRepository
+import com.app.dubkiapp.domain.repositories.ScheduleRepository
+import com.app.dubkiapp.domain.repositories.ServicesRepository
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module

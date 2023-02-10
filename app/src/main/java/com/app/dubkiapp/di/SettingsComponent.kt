@@ -1,6 +1,6 @@
 package com.app.dubkiapp.di
 
-import com.app.dubkiapp.ui.settings.SettingsFragment
+import com.app.dubkiapp.ui.view.SettingsFragment
 import dagger.Subcomponent
 
 @Subcomponent(

@@ -1,4 +1,4 @@
-package com.app.dubkiapp.ui.schedule
+package com.app.dubkiapp.ui.view
 
 import android.content.Context
 import android.os.Bundle
@@ -10,14 +10,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.dubkiapp.MainActivity
 import com.app.dubkiapp.databinding.RecyclerScheduleBinding
+import com.app.dubkiapp.ui.stateholders.ScheduleViewModel
 import javax.inject.Inject
 
 class ScheduleMoscowFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<ScheduleViewModel> { viewModelFactory }
+    private val viewModel by viewModels<ScheduleViewModel>({ activity as MainActivity }) { viewModelFactory }
     private var _binding: RecyclerScheduleBinding? = null
     private val binding get() = _binding!!
     private lateinit var scheduleAdapter: ScheduleAdapter
@@ -44,17 +46,14 @@ class ScheduleMoscowFragment : Fragment() {
         arguments?.takeIf { it.containsKey("pos") }?.apply {
             when(getInt("pos")) {
                 0 -> viewModel.scheduleMoscow.observe(viewLifecycleOwner) {
-                    scheduleAdapter.submitList(it)
+                    scheduleAdapter.submitList(it.buses)
+                    (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(it.first)
                 }
                 else -> viewModel.scheduleDubki.observe(viewLifecycleOwner) {
-                    scheduleAdapter.submitList(it)
+                    scheduleAdapter.submitList(it.buses)
+                    (binding.recyclerSchedule.layoutManager as LinearLayoutManager).scrollToPosition(it.first)
                 }
             }
         }
-//        viewModel.schedule.observe(viewLifecycleOwner) {
-//            scheduleAdapter.submitList(it)
-//        }
-//        arguments?.takeIf { it.containsKey("sas") }?.apply {
-//        }
     }
 }

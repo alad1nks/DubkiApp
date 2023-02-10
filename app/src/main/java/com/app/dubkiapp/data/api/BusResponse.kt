@@ -1,6 +1,6 @@
-package com.app.dubkiapp.network
+package com.app.dubkiapp.data.api
 
-import com.app.dubkiapp.database.domain.DatabaseSchedule
+import com.app.dubkiapp.data.model.DatabaseSchedule
 
 
 data class BusResponse(

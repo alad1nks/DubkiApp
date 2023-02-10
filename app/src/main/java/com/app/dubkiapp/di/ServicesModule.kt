@@ -1,8 +1,7 @@
 package com.app.dubkiapp.di
 
 import androidx.lifecycle.ViewModel
-import com.app.dubkiapp.ui.services.ServicesViewModel
-import com.app.dubkiapp.ui.settings.SettingsViewModel
+import com.app.dubkiapp.ui.stateholders.ServicesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

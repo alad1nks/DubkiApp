@@ -1,4 +1,4 @@
-package com.app.dubkiapp.ui.services
+package com.app.dubkiapp.ui.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.dubkiapp.databinding.ServiceItemBinding
-import com.app.dubkiapp.domain.Service
+import com.app.dubkiapp.ui.model.Service
 
 class ServicesAdapter(
     private val listener: Listener

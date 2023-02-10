@@ -1,6 +1,6 @@
 package com.app.dubkiapp.di
 
-import com.app.dubkiapp.ui.services.ServicesFragment
+import com.app.dubkiapp.ui.view.ServicesFragment
 import dagger.Subcomponent
 
 @Subcomponent(

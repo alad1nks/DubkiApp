@@ -1,4 +1,4 @@
-package com.app.dubkiapp.domain
+package com.app.dubkiapp.ui.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -16,4 +16,4 @@ data class Bus(
     @DrawableRes val inTimeDrawableResId: Int? = null,
     @StringRes val stationStringResId: Int? = null,
     @StyleRes val stationStyleResId: Int? = null
-    )
+)

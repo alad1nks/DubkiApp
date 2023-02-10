@@ -1,4 +1,4 @@
-package com.app.dubkiapp.ui.settings
+package com.app.dubkiapp.ui.stateholders
 
 import androidx.lifecycle.ViewModel
 

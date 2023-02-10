@@ -2,10 +2,10 @@ package com.app.dubkiapp.di
 
 import com.app.dubkiapp.preferences.AppPreference
 import com.app.dubkiapp.preferences.AppPreferenceImpl
-import com.app.dubkiapp.repositories.DefaultScheduleRepository
-import com.app.dubkiapp.repositories.DefaultServicesRepository
-import com.app.dubkiapp.repositories.ScheduleRepository
-import com.app.dubkiapp.repositories.ServicesRepository
+import com.app.dubkiapp.data.repositories.ScheduleRepositoryImpl
+import com.app.dubkiapp.data.repositories.ServicesRepositoryImpl
+import com.app.dubkiapp.domain.repositories.ScheduleRepository
+import com.app.dubkiapp.domain.repositories.ServicesRepository
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -15,11 +15,11 @@ abstract class AppModuleBinds {
 
     @Singleton
     @Binds
-    abstract fun bindScheduleRepository(repo: DefaultScheduleRepository) : ScheduleRepository
+    abstract fun bindScheduleRepository(repo: ScheduleRepositoryImpl) : ScheduleRepository
 
     @Singleton
     @Binds
-    abstract fun bindServicesRepository(repo: DefaultServicesRepository) : ServicesRepository
+    abstract fun bindServicesRepository(repo: ServicesRepositoryImpl) : ServicesRepository
 
     @Binds
     abstract fun bindSharedPreferences(appPreferenceImpl: AppPreferenceImpl): AppPreference

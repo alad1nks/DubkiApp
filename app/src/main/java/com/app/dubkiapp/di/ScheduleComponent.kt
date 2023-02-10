@@ -1,7 +1,7 @@
 package com.app.dubkiapp.di
 
-import com.app.dubkiapp.ui.schedule.ScheduleFragment
-import com.app.dubkiapp.ui.schedule.ScheduleMoscowFragment
+import com.app.dubkiapp.ui.view.ScheduleFragment
+import com.app.dubkiapp.ui.view.ScheduleMoscowFragment
 import dagger.Subcomponent
 
 @Subcomponent(

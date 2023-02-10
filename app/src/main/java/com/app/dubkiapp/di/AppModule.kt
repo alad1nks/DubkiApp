@@ -1,9 +1,8 @@
 package com.app.dubkiapp.di
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.room.Room
-import com.app.dubkiapp.database.ScheduleDatabase
+import com.app.dubkiapp.data.db.ScheduleDatabase
 import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
@@ -27,6 +26,7 @@ object AppModule {
                 INSTANCESCHEDULE = Room.databaseBuilder(context.applicationContext,
                     ScheduleDatabase::class.java,
                     "schedule_database")
+                    .fallbackToDestructiveMigration()
                     .build()
             }
         }

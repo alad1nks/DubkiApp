@@ -1,6 +1,5 @@
-package com.app.dubkiapp.domain
+package com.app.dubkiapp.ui.model
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 

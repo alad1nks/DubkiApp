@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/navigation_schedule"
-        android:name="com.app.dubkiapp.ui.schedule.ScheduleFragment"
+        android:name="com.app.dubkiapp.ui.view.ScheduleFragment"
         tools:layout="@layout/fragment_schedule" />
 
     <fragment
         android:id="@+id/navigation_services"
-        android:name="com.app.dubkiapp.ui.services.ServicesFragment"
+        android:name="com.app.dubkiapp.ui.view.ServicesFragment"
         tools:layout="@layout/fragment_services" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.app.dubkiapp.ui.settings.SettingsFragment"
+        android:name="com.app.dubkiapp.ui.view.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 </navigation>

@@ -1,9 +1,9 @@
-package com.app.dubkiapp.database.domain
+package com.app.dubkiapp.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.app.dubkiapp.R
-import com.app.dubkiapp.domain.Bus
+import com.app.dubkiapp.ui.model.Bus
 import java.util.Calendar
 
 @Entity(tableName = "databaseschedule")

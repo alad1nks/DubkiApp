@@ -1,4 +1,4 @@
-package com.app.dubkiapp.ui.schedule
+package com.app.dubkiapp.ui.view
 
 import android.content.Context
 import android.os.Bundle
@@ -13,8 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.app.dubkiapp.MainActivity
 import com.app.dubkiapp.R
 import com.app.dubkiapp.databinding.FragmentScheduleBinding
+import com.app.dubkiapp.ui.stateholders.ScheduleStateAdapter
+import com.app.dubkiapp.ui.stateholders.ScheduleViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
@@ -24,7 +27,7 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<ScheduleViewModel> { viewModelFactory }
+    private val viewModel by viewModels<ScheduleViewModel>({ activity as MainActivity }) { viewModelFactory }
     private var _binding: FragmentScheduleBinding? = null
     private val binding get() = _binding!!
     private lateinit var scheduleStateAdapter: ScheduleStateAdapter
@@ -102,10 +105,10 @@ class ScheduleFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         when(spinner.id) {
             R.id.station_spinner -> {
-                viewModel.setStation()
+                viewModel.setStation(pos)
             }
             else -> {
-                Log.d("spinner", "2")
+                viewModel.setDay(pos)
             }
         }
     }

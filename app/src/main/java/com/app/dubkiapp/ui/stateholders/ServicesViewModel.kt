@@ -1,9 +1,9 @@
-package com.app.dubkiapp.ui.services
+package com.app.dubkiapp.ui.stateholders
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.app.dubkiapp.domain.Service
-import com.app.dubkiapp.repositories.ServicesRepository
+import com.app.dubkiapp.ui.model.Service
+import com.app.dubkiapp.domain.repositories.ServicesRepository
 import javax.inject.Inject
 
 class ServicesViewModel @Inject constructor(
